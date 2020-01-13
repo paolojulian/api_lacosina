@@ -52,8 +52,7 @@ public class User {
     public User(String email, String username, String password) {
         this.email = email;
         this.username = username;
-        // TODO - hash password
-        this.password = this.password;
+        this.password = hashPassword(password);
     }
 
     public void setProfile(Profile profile) {
