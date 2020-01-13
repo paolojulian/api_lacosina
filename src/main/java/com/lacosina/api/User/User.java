@@ -52,7 +52,8 @@ public class User {
     public User(String email, String username, String password) {
         this.email = email;
         this.username = username;
-        this.password = hashPassword(password);
+        // TODO - hash password
+        this.password = this.password;
     }
 
     public void setProfile(Profile profile) {
@@ -67,6 +68,7 @@ public class User {
         } catch (NoSuchAlgorithmException e) {
             System.err.println("Im sorry, but SHA-512 is not a valid algo");
         }
+        return "";
     }
 
     private byte[] generateSalt() {
