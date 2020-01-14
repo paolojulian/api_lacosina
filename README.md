@@ -19,7 +19,42 @@ Settings > Plugins
 ```
 ___
 ### Queries
-TODO
+Get users list
+```
+query {
+    users (limitCount: 10) {
+        id
+        email
+        username
+        profile {
+            firstName
+            lastName
+        }
+    }
+}
+```
+
+Get a certain user
+```
+query {
+    user (id: 2) {
+        email
+        username
+        profile {
+            handle
+        }
+    }
+}
+```
 ___
 ### Mutations
-TODO
+Register a user
+```
+mutation {
+    register (email: "scottypipz@gmail.com", username: "chefpipz", password: "qwe123") {
+        id
+        email
+    }
+}
+```
+___
