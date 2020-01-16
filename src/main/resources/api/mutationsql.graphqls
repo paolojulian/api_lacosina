@@ -1,0 +1,15 @@
+type Mutation {
+    login(username: String, password: String): String
+    register(email: String, username: String, password: String): User
+    deleteUser(id: ID): Boolean
+
+    updateProfile(
+        id: ID,
+        firstName: String!,
+        lastName: String!,
+        handle: String!
+    ): Profile
+
+
+    createPlaylist(name: String): Playlist
+}
