@@ -27,4 +27,21 @@ public class PlaylistService {
         return this.playlistRepository.save(playlist);
     }
 
+    /**
+     * Deletes the playlist by the passed id
+     * @param id - id of the playlist
+     *
+     * @return
+     */
+    @Transactional
+    public Boolean deletePlaylist(final Integer id) {
+        try {
+            this.playlistRepository.deleteById(id);
+
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }
