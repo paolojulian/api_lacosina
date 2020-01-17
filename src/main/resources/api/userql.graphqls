@@ -1,23 +1,7 @@
-type Profile {
-    id: ID!,
-    firstName: String,
-    lastName: String,
-    handle: String,
-    birthDate: String,
-    address: String,
-    avatar: String,
-    user: User!
-}
-
 type User {
     id: ID!,
     email: String!,
     username: String!,
     password: String!,
     profile: Profile!
-}
-
-type Query {
-    users(limitCount: Int! = 10): [User]
-    user(id: ID): User
 }

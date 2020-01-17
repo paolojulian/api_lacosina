@@ -13,4 +13,6 @@ public class PlaylistMutation implements GraphQLMutationResolver {
     public Playlist createPlaylist(String name) {
         return this.playlistService.createPlaylist(name);
     }
+
+    public Boolean deletePlaylist(Integer id) { return this.playlistService.deletePlaylist(id); }
 }

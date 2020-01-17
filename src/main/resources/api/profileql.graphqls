@@ -1,0 +1,11 @@
+type Profile {
+    id: ID!,
+    firstName: String,
+    lastName: String,
+    handle: String,
+    birthDate: String,
+    address: String,
+    avatar: String,
+    user: User!
+}
+
