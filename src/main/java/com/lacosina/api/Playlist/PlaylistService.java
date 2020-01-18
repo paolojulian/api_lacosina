@@ -1,7 +1,10 @@
 package com.lacosina.api.Playlist;
 
+import org.hibernate.dialect.Ingres9Dialect;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.criteria.CriteriaBuilder;
 
 @Service
 public class PlaylistService {
@@ -22,6 +25,22 @@ public class PlaylistService {
     @Transactional
     public Playlist createPlaylist(final String name) {
         final Playlist playlist = new Playlist();
+        playlist.setName(name);
+
+        return this.playlistRepository.save(playlist);
+    }
+
+    /**
+     * Update the playlist general information
+     *
+     * @param id - PK of the playlist
+     * @param name - the field to be updated
+     *
+     * @return - The new Playlist Entity after save
+     */
+    @Transactional
+    public Playlist updatePlaylist(final Integer id, final String name) {
+        final Playlist playlist = this.playlistRepository.findById(id).orElseThrow();
         playlist.setName(name);
 
         return this.playlistRepository.save(playlist);

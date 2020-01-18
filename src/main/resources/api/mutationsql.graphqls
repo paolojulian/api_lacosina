@@ -12,5 +12,6 @@ type Mutation {
 
 
     createPlaylist(name: String): Playlist
+    updatePlaylist(id: ID, name: String): Playlist
     deletePlaylist(id: ID): Boolean
 }
