@@ -1,0 +1,7 @@
+type Ingredient {
+    id: ID!,
+    ingredientName: String!,
+    description: String,
+    category: String,
+}
+
