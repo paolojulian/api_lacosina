@@ -3,7 +3,7 @@ type Recipe {
     name: String!,
     description: String,
     durationFrom: Int,
-    durationTo: Int
+    durationTo: Int,
 }
 
 input BasicRecipeInput {
