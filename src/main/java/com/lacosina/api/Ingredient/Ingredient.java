@@ -32,5 +32,6 @@ public class Ingredient {
         //validate dn dto bago iset?
         this.setIngredientName(name);
         this.setDescription(description);
+        this.setCategory("Others");
     }
 }
