@@ -16,4 +16,9 @@ public class RecipeService {
     public Recipe createRecipe(Recipe recipe) {
         return this.recipeRepository.save(recipe);
     }
+
+    @Transactional
+    public Recipe getRecipe(final int id) {
+        return this.recipeRepository.findById(id).orElseThrow();
+    }
 }

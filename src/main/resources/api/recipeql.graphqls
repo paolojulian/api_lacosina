@@ -4,6 +4,7 @@ type Recipe {
     description: String,
     durationFrom: Int,
     durationTo: Int,
+    ingredients: [Ingredient]
 }
 
 input BasicRecipeInput {
