@@ -3,8 +3,7 @@ type Recipe {
     name: String!,
     description: String,
     durationFrom: Int,
-    durationTo: Int,
-    ingredients: [Ingredient]
+    durationTo: Int
 }
 
 input BasicRecipeInput {
@@ -12,4 +11,14 @@ input BasicRecipeInput {
     description: String = "",
     durationFrom: Int = 0,
     durationTo: Int = 1
+}
+
+extend type Mutation {
+    createRecipe(input: BasicRecipeInput!): Recipe
+    updateRecipe(id: ID, input: BasicRecipeInput!): Recipe
+    deleteRecipe(id: ID): Boolean
+}
+
+extend type Query {
+    recipe(id: ID): Recipe
 }

@@ -17,7 +17,7 @@ public class Recipe implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;
@@ -36,6 +36,8 @@ public class Recipe implements Serializable {
 
     @ManyToOne
     private User user;
+
+    public Recipe() {}
 
     public Recipe(String name, String description, Long durationFrom, Long durationTo) {
         this.name = name;

@@ -14,4 +14,13 @@ public class RecipeMutation implements GraphQLMutationResolver {
     public Recipe createRecipe(BasicRecipeInput input) {
         return this.recipeService.createRecipe(input.toRecipe());
     }
+
+    public Recipe updateRecipe(final int id, BasicRecipeInput input) {
+        return this.recipeService.updateRecipe(id, input.toRecipe());
+    }
+
+    public Boolean deleteRecipe(final int id) {
+        this.recipeService.deleteRecipe(id);
+        return true;
+    }
 }

@@ -1,6 +1,4 @@
 type Query {
     users(limitCount: Int! = 10): [User]
     user(id: ID): User
-
-    recipe(id: ID): Recipe
 }
