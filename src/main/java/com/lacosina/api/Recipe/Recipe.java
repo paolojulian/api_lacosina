@@ -1,6 +1,5 @@
 package com.lacosina.api.Recipe;
 
-import com.lacosina.api.Exception.InvalidDurationException;
 import com.lacosina.api.Ingredient.Ingredient;
 import com.lacosina.api.User.User;
 import lombok.Data;
@@ -11,6 +10,7 @@ import java.util.Set;
 
 @Data
 @Entity
+@Table(name="recipe")
 public class Recipe implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,9 +42,6 @@ public class Recipe implements Serializable {
     public Recipe(String name, String description, Long durationFrom, Long durationTo) {
         this.name = name;
         this.description = description;
-        if (durationFrom > durationTo) {
-//            throw new InvalidDurationException();
-        }
         this.durationFrom = durationFrom;
         this.durationTo = durationTo;
     }
