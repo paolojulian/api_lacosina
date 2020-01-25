@@ -21,7 +21,9 @@ public class IngredientService {
     @Transactional
     public Ingredient updateIngredient(final int id, Ingredient ingredient){
         Ingredient ingredientUpdate = this.ingredientRepository.findById(id).orElseThrow();
-        ingredientUpdate = ingredient;
+        ingredientUpdate.setIngredientName(ingredient.getIngredientName());
+        ingredientUpdate.setCategory(ingredient.getIngredientName());
+        ingredientUpdate.setDescription(ingredient.getDescription());
         return this.ingredientRepository.save(ingredientUpdate);
     }
 
