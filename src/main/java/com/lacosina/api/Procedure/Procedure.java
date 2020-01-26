@@ -1,11 +1,15 @@
 package com.lacosina.api.Procedure;
 
 import lombok.Data;
+import org.apache.tomcat.jni.Proc;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
+@Table(name = "`procedure`")
 public class Procedure {
 
     @Id
@@ -23,6 +27,8 @@ public class Procedure {
 
     @Column(name="duration_in_seconds")
     private int durationInSeconds;
+
+    public Procedure() {}
 
     public Procedure(String name, String description, String image, int durationInSeconds) {
         this.setProcedureName(name);

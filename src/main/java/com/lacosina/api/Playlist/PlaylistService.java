@@ -18,15 +18,10 @@ public class PlaylistService {
     /**
      * Creates a playlist
      *
-     * @param name - The name of the playlist
-     *
      * @return - Playlist Entity
      */
     @Transactional
-    public Playlist createPlaylist(final String name) {
-        final Playlist playlist = new Playlist();
-        playlist.setName(name);
-
+    public Playlist createPlaylist(Playlist playlist) {
         return this.playlistRepository.save(playlist);
     }
 
@@ -34,14 +29,15 @@ public class PlaylistService {
      * Update the playlist general information
      *
      * @param id - PK of the playlist
-     * @param name - the field to be updated
+     * @param newPlaylist - The new updated playlist
      *
      * @return - The new Playlist Entity after save
      */
     @Transactional
-    public Playlist updatePlaylist(final Integer id, final String name) {
-        final Playlist playlist = this.playlistRepository.findById(id).orElseThrow();
-        playlist.setName(name);
+    public Playlist updatePlaylist(final int id, Playlist newPlaylist) {
+        Playlist playlist = this.playlistRepository.findById(id).orElseThrow();
+        playlist.setName(newPlaylist.getName());
+        playlist.setFavorite(newPlaylist.getFavorite());
 
         return this.playlistRepository.save(playlist);
     }
@@ -53,7 +49,7 @@ public class PlaylistService {
      * @return
      */
     @Transactional
-    public Boolean deletePlaylist(final Integer id) {
+    public Boolean deletePlaylist(final int id) {
         try {
             this.playlistRepository.deleteById(id);
 

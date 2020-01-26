@@ -14,7 +14,7 @@ public class Playlist implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private int id;
 
     @Column(name = "name")
     private String name;

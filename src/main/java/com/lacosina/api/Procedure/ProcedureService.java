@@ -13,8 +13,13 @@ public class ProcedureService {
     }
 
     @Transactional
-    public Procedure createProcedure(final String name, final String description, final String image,final int duration){
-        final Procedure procedure = new Procedure(name,description,image,duration);
+    public Procedure createProcedure(Procedure postProcedure){
+        final Procedure procedure = new Procedure(
+                postProcedure.getProcedureName(),
+                postProcedure.getDescription(),
+                postProcedure.getImage(),
+                postProcedure.getDurationInSeconds()
+        );
         return this.procedureRepository.save(procedure);
     }
 
@@ -24,6 +29,7 @@ public class ProcedureService {
         procedureUpdate.setDescription(procedure.getDescription());
         procedureUpdate.setProcedureName(procedure.getProcedureName());
         procedureUpdate.setDurationInSeconds(procedure.getDurationInSeconds());
+
         return this.procedureRepository.save(procedureUpdate);
     }
 

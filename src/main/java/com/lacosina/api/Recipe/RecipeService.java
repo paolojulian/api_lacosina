@@ -3,8 +3,6 @@ package com.lacosina.api.Recipe;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.NoSuchElementException;
-
 @Service
 public class RecipeService {
 
@@ -20,22 +18,23 @@ public class RecipeService {
     }
 
     @Transactional
-    public Recipe updateRecipe(final Integer id, Recipe recipe) {
+    public Recipe updateRecipe(final int id, Recipe recipe) {
         Recipe recipeToUpdate = this.getRecipe(id);
         recipeToUpdate.setName(recipe.getName());
         recipeToUpdate.setDescription(recipe.getDescription());
-        recipeToUpdate.setDurationFrom(recipe.getDurationFrom());
-        recipeToUpdate.setDurationTo(recipe.getDurationTo());
+        recipeToUpdate.setDurationFrom_minutes(recipe.getDurationFrom_minutes());
+        recipeToUpdate.setDurationTo_minutes(recipe.getDurationTo_minutes());
+
         return this.recipeRepository.save(recipeToUpdate);
     }
 
     @Transactional
-    public void deleteRecipe(final Integer id) {
+    public void deleteRecipe(final int id) {
         this.recipeRepository.deleteById(id);
     }
 
     @Transactional
-    public Recipe getRecipe(final Integer id) {
+    public Recipe getRecipe(final int id) {
         return this.recipeRepository.findById(id).orElseThrow();
     }
 }

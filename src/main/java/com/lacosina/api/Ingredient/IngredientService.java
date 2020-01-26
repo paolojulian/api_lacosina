@@ -13,8 +13,7 @@ public class IngredientService {
     }
 
     @Transactional
-    public Ingredient createIngredient(final String name, final String description, final String category){
-        final Ingredient ingredient = new Ingredient(name,description,category);
+    public Ingredient createIngredient(Ingredient ingredient){
         return this.ingredientRepository.save(ingredient);
     }
 
@@ -24,6 +23,7 @@ public class IngredientService {
         ingredientUpdate.setIngredientName(ingredient.getIngredientName());
         ingredientUpdate.setCategory(ingredient.getIngredientName());
         ingredientUpdate.setDescription(ingredient.getDescription());
+
         return this.ingredientRepository.save(ingredientUpdate);
     }
 
