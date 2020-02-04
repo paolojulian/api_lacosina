@@ -3,6 +3,8 @@ package com.lacosina.api.Recipe;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class RecipeService {
 
@@ -33,8 +35,13 @@ public class RecipeService {
         this.recipeRepository.deleteById(id);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Recipe getRecipe(final int id) {
         return this.recipeRepository.findById(id).orElseThrow();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Recipe> getAllRecipe() {
+        return this.recipeRepository.findAll();
     }
 }

@@ -1,19 +1,19 @@
 package com.lacosina.api.Playlist;
 
-import org.hibernate.dialect.Ingres9Dialect;
+import com.lacosina.api.Recipe.Recipe;
+import com.lacosina.api.Recipe.RecipeRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.CriteriaBuilder;
+import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class PlaylistService {
 
     private final PlaylistRepository playlistRepository;
-
-    public PlaylistService(PlaylistRepository playlistRepository) {
-        this.playlistRepository = playlistRepository;
-    }
+    private final RecipeRepository recipeRepository;
 
     /**
      * Creates a playlist
@@ -23,6 +23,11 @@ public class PlaylistService {
     @Transactional
     public Playlist createPlaylist(Playlist playlist) {
         return this.playlistRepository.save(playlist);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Playlist> fetchAllPlaylists() {
+        return this.playlistRepository.findAll();
     }
 
     /**
@@ -59,4 +64,14 @@ public class PlaylistService {
         }
     }
 
+    @Transactional
+    public void addRecipeToPlaylist(
+            final int playlistId,
+            final int recipeId
+    ) {
+        Playlist playlist = this.playlistRepository.findById(playlistId).orElseThrow();
+        Recipe recipe = this.recipeRepository.findById(recipeId).orElseThrow();
+        playlist.getRecipes().add(recipe);
+        this.playlistRepository.save(playlist);
+    }
 }

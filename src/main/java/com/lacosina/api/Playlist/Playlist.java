@@ -1,10 +1,12 @@
 package com.lacosina.api.Playlist;
 
-import com.lacosina.api.User.User;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.lacosina.api.Recipe.Recipe;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Data
 @Entity
@@ -21,7 +23,16 @@ public class Playlist implements Serializable {
 
     @Column(name = "favorite")
     private Boolean favorite;
+//
+//    @ManyToOne
+//    private User user;
 
-    @ManyToOne
-    private User user;
+    @JsonManagedReference
+    @ManyToMany
+    @JoinTable(
+            name = "playlist_recipe",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "playlist_id")
+    )
+    public Set<Recipe> recipes;
 }
