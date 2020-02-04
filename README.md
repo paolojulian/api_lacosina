@@ -64,7 +64,8 @@ Docker
 ```
 # Stop docker containers
 docker stop lacosina
-docker stop mysql-pipz
+docker stop docker-mysql
+docker start -i docker-mysql
 
 docker run -p 2012:3306 --name mysql-pipz -e MYSQL_ROOT_PASSWORD={} -e MYSQL_DATABASE=lacosina -e MYSQL_USER={} MYSQL_PASSWORD={} mysql:8
 # Start the jar server

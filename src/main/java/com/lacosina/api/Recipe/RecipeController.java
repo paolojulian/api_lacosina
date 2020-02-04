@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/recipes")
@@ -13,14 +14,19 @@ public class RecipeController {
     @Autowired
     private RecipeService recipeService;
 
-    @GetMapping("/{id}")
-    public Recipe getRecipe(@PathVariable int id) {
-        return this.recipeService.getRecipe(id);
+    @GetMapping
+    public List<Recipe> getAllRecipe() {
+        return this.recipeService.getAllRecipe();
     }
 
     @PostMapping
     public Recipe createRecipe(@Valid @RequestBody Recipe recipe) {
         return this.recipeService.createRecipe(recipe);
+    }
+
+    @GetMapping("/{id}")
+    public Recipe getRecipe(@PathVariable int id) {
+        return this.recipeService.getRecipe(id);
     }
 
     @PutMapping("/{id}")

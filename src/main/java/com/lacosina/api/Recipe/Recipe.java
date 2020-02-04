@@ -32,7 +32,7 @@ public class Recipe implements Serializable {
 
     @Column(name = "duration_to_minutes")
     private Long durationTo_minutes;
-//
+
 //    @OneToMany
 //    private Set<Ingredient> ingredients;
 
