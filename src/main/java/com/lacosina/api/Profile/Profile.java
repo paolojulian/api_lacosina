@@ -17,6 +17,7 @@ public class Profile implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="profile_id")
     private int id;
 
     @Column(name="first_name")

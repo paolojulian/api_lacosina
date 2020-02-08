@@ -14,6 +14,7 @@ public class Procedure {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="procedure_id")
     private int id;
 
     @Column(name="procedure_name")
