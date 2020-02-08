@@ -13,8 +13,10 @@ import java.io.Serializable;
 @Table(name="recipe")
 public class Recipe implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "name")
@@ -30,7 +32,7 @@ public class Recipe implements Serializable {
 
     @Column(name = "duration_to_minutes")
     private Long durationTo_minutes;
-
+//
 //    @OneToMany
 //    private Set<Ingredient> ingredients;
 
