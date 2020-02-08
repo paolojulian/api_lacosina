@@ -34,7 +34,7 @@ public class Recipe implements Serializable {
 
     @OneToMany
     @JoinColumn(name = "recipe_id")
-    private Set<RecipeIngredient> ingredients;
+    private Set<RecipeIngredient> ingredients = new HashSet<>();
 
     @ManyToOne
     private User user;

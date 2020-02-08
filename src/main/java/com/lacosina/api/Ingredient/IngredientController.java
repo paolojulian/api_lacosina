@@ -13,7 +13,7 @@ public class IngredientController {
     @Autowired
     private IngredientService ingredientService;
 
-    @PostMapping("/")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Ingredient createIngredient(@Valid @RequestBody Ingredient ingredient) {
         return this.ingredientService.createIngredient(ingredient);

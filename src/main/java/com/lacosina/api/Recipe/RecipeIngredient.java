@@ -18,7 +18,7 @@ public class RecipeIngredient {
     private String measurement;
 
     @ManyToOne
-    @JoinColumn(name = "recipe_id", insertable = false, nullable = false)
+    @JoinColumn(name = "recipe_id", insertable = false)
     private Recipe recipe;
 
     @OneToOne

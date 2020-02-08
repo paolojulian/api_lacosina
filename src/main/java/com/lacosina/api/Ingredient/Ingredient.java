@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
+@Table(name = "ingredient")
 public class Ingredient {
 
     @Id
@@ -20,6 +21,8 @@ public class Ingredient {
 
     @Column(name="category")
     private String category;
+
+    public Ingredient() {}
 
     public Ingredient(String name, String description, String category) {
         //validate dn dto bago iset?

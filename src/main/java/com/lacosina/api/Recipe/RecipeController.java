@@ -1,5 +1,6 @@
 package com.lacosina.api.Recipe;
 
+import com.lacosina.api.Recipe.DTO.FullRecipeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +20,13 @@ public class RecipeController {
         return this.recipeService.getAllRecipe();
     }
 
+//    @PostMapping
+//    public Recipe createRecipe(@Valid @RequestBody Recipe recipe) {
+//        return this.recipeService.createRecipe(recipe);
+//    }
+//
     @PostMapping
-    public Recipe createRecipe(@Valid @RequestBody Recipe recipe) {
+    public Recipe createRecipe(@Valid @RequestBody FullRecipeDTO recipe) {
         return this.recipeService.createRecipe(recipe);
     }
 

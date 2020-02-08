@@ -1,21 +1,41 @@
 package com.lacosina.api.Recipe;
 
+import com.lacosina.api.Ingredient.Ingredient;
+import com.lacosina.api.Recipe.DTO.FullRecipeDTO;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class RecipeService {
 
     private final RecipeRepository recipeRepository;
-
-    public RecipeService(RecipeRepository recipeRepository) {
-        this.recipeRepository = recipeRepository;
-    }
+    private final RecipeIngredientRepository recipeIngredientRepository;
 
     @Transactional
-    public Recipe createRecipe(Recipe recipe) {
+    public Recipe createRecipe(FullRecipeDTO recipeDTO) {
+        Recipe recipe = new Recipe();
+        recipe.setName(recipeDTO.getName());
+        recipe.setDescription(recipeDTO.getDescription());
+        recipe.setDurationFrom_minutes(recipeDTO.getDurationFrom_minutes());
+        recipe.setDurationTo_minutes(recipeDTO.getDurationTo_minutes());
+        // TODO - Rework
+        for (Integer ingredientId: recipeDTO.getIngredientIds()) {
+
+            Ingredient ingredient = new Ingredient();
+            ingredient.setId(ingredientId);
+
+            RecipeIngredient recipeIngredient = new RecipeIngredient();
+            recipeIngredient.setIngredient(ingredient);
+            recipeIngredient.setMeasurement("Test");
+
+            recipe.getIngredients().add(recipeIngredientRepository.save(recipeIngredient));
+
+        }
+
         return this.recipeRepository.save(recipe);
     }
 
