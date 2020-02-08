@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -71,7 +72,7 @@ public class PlaylistService {
     ) {
         Playlist playlist = this.playlistRepository.findById(playlistId).orElseThrow();
         Recipe recipe = this.recipeRepository.findById(recipeId).orElseThrow();
-//        playlist.getRecipes().add(recipe);
+        playlist.getRecipes().add(recipe);
         this.playlistRepository.save(playlist);
     }
 }
