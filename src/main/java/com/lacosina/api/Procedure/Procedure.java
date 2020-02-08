@@ -13,8 +13,7 @@ import javax.validation.constraints.NotNull;
 public class Procedure {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="procedure_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name="procedure_name")
