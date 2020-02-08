@@ -7,16 +7,15 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.*;
 
 @Data
 @Entity
 @Table(name="recipe")
 public class Recipe implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "name")
@@ -32,9 +31,10 @@ public class Recipe implements Serializable {
 
     @Column(name = "duration_to_minutes")
     private Long durationTo_minutes;
-//
-//    @OneToMany
-//    private Set<Ingredient> ingredients;
+
+    @OneToMany
+    @JoinColumn(name = "recipe_id")
+    private Set<RecipeIngredient> ingredients;
 
     @ManyToOne
     private User user;

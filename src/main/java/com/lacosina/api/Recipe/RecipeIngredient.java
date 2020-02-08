@@ -11,17 +11,14 @@ import javax.persistence.*;
 public class RecipeIngredient {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "recipe_ingredient_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @Column(name = "order")
-    private int order;
 
     @Column(name = "measurement")
     private String measurement;
 
     @ManyToOne
+    @JoinColumn(name = "recipe_id", insertable = false, nullable = false)
     private Recipe recipe;
 
     @OneToOne
