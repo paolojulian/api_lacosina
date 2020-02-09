@@ -16,5 +16,4 @@ public class FullRecipeDTO {
     private Long durationFrom_minutes;
     private Long durationTo_minutes;
     private Set<Integer> ingredientIds;
-    private Integer userId;
 }
