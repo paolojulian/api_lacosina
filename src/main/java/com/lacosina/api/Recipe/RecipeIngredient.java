@@ -1,5 +1,6 @@
 package com.lacosina.api.Recipe;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lacosina.api.Ingredient.Ingredient;
 import lombok.Data;
@@ -18,9 +19,8 @@ public class RecipeIngredient {
     @Column(name = "measurement")
     private String measurement;
 
-    @ManyToOne
     @JoinColumn(name = "recipe_id", insertable = false)
-    @JsonIgnore
+    @JsonBackReference
     private Recipe recipe;
 
     @OneToOne

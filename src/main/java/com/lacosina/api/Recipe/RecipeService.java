@@ -7,7 +7,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -23,6 +25,9 @@ public class RecipeService {
         recipe.setDescription(recipeDTO.getDescription());
         recipe.setDurationFrom_minutes(recipeDTO.getDurationFrom_minutes());
         recipe.setDurationTo_minutes(recipeDTO.getDurationTo_minutes());
+
+        Set<RecipeIngredient> recipeIngredientSet = new HashSet<RecipeIngredient>();
+
         // TODO - Rework
         for (RecipeIngredientDTO recipeIngredientDTO: recipeDTO.getRecipeIngredients()) {
             RecipeIngredient recipeIngredient = new RecipeIngredient();
@@ -30,10 +35,10 @@ public class RecipeService {
             Ingredient ingredient = new Ingredient(recipeIngredientDTO.getIngredientId());
             recipeIngredient.setIngredient(ingredient);
 
-            recipe
-                    .getIngredients()
-                    .add(recipeIngredientRepository.save(recipeIngredient));
+            recipeIngredientSet.add(recipeIngredientRepository.save(recipeIngredient));
         }
+
+        recipe.setIngredients(recipeIngredientSet);
 
         return this.recipeRepository.save(recipe);
     }

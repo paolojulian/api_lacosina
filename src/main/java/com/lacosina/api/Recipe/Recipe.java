@@ -1,5 +1,8 @@
 package com.lacosina.api.Recipe;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.lacosina.api.User.User;
 import lombok.Data;
 
@@ -32,8 +35,10 @@ public class Recipe implements Serializable {
     @Column(name = "duration_to_minutes")
     private Long durationTo_minutes;
 
-    @OneToMany(mappedBy = "recipe", fetch = FetchType.LAZY)
-    private List<RecipeIngredient> ingredients = new ArrayList<>();
+    @OneToMany
+    @JoinColumn(name = "recipe_id")
+    @JsonManagedReference
+    private Set<RecipeIngredient> ingredients = new HashSet<RecipeIngredient>();
 
     @ManyToOne
     private User user;
