@@ -3,6 +3,8 @@ package com.lacosina.api.Ingredient;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Data
 @Entity
@@ -14,12 +16,16 @@ public class Ingredient {
     private int id;
 
     @Column(name="ingredient_name")
+    @NotNull
+    @Size(min = 2, max = 30)
     private String ingredientName;
 
     @Column(name="description")
+    @Size(min = 0, max = 1000)
     private String description;
 
     @Column(name="category")
+    @Size(min = 0, max = 30)
     private String category;
 
     public Ingredient() {}
