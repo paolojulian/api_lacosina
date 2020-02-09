@@ -30,6 +30,10 @@ public class Ingredient {
 
     public Ingredient() {}
 
+    public Ingredient(int id) {
+        this.id = id;
+    }
+
     public Ingredient(String name, String description, String category) {
         //validate dn dto bago iset?
         this.setIngredientName(name);

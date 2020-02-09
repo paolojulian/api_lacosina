@@ -28,5 +28,6 @@ public class FullRecipeDTO {
 
     @Min(value = 0)
     private Long durationTo_minutes;
-    private Set<Integer> ingredientIds;
+
+    private Set<RecipeIngredientDTO> recipeIngredients;
 }

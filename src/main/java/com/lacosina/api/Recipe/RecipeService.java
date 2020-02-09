@@ -2,6 +2,7 @@ package com.lacosina.api.Recipe;
 
 import com.lacosina.api.Ingredient.Ingredient;
 import com.lacosina.api.Recipe.DTO.FullRecipeDTO;
+import com.lacosina.api.Recipe.DTO.RecipeIngredientDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,17 +24,15 @@ public class RecipeService {
         recipe.setDurationFrom_minutes(recipeDTO.getDurationFrom_minutes());
         recipe.setDurationTo_minutes(recipeDTO.getDurationTo_minutes());
         // TODO - Rework
-        for (Integer ingredientId: recipeDTO.getIngredientIds()) {
-
-            Ingredient ingredient = new Ingredient();
-            ingredient.setId(ingredientId);
-
+        for (RecipeIngredientDTO recipeIngredientDTO: recipeDTO.getRecipeIngredients()) {
             RecipeIngredient recipeIngredient = new RecipeIngredient();
+            recipeIngredient.setMeasurement(recipeIngredientDTO.getMeasurement());
+            Ingredient ingredient = new Ingredient(recipeIngredientDTO.getIngredientId());
             recipeIngredient.setIngredient(ingredient);
-            recipeIngredient.setMeasurement("Test");
 
-            recipe.getIngredients().add(recipeIngredientRepository.save(recipeIngredient));
-
+            recipe
+                    .getIngredients()
+                    .add(recipeIngredientRepository.save(recipeIngredient));
         }
 
         return this.recipeRepository.save(recipe);

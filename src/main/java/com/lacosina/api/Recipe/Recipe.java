@@ -32,9 +32,8 @@ public class Recipe implements Serializable {
     @Column(name = "duration_to_minutes")
     private Long durationTo_minutes;
 
-    @OneToMany
-    @JoinColumn(name = "recipe_id")
-    private Set<RecipeIngredient> ingredients = new HashSet<>();
+    @OneToMany(mappedBy = "recipe", fetch = FetchType.LAZY)
+    private List<RecipeIngredient> ingredients = new ArrayList<>();
 
     @ManyToOne
     private User user;
