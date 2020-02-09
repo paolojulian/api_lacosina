@@ -6,6 +6,8 @@ import com.lacosina.api.User.User;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -18,6 +20,8 @@ public class Playlist implements Serializable {
     private int id;
 
     @Column(name = "name")
+    @NotNull
+    @Size(min = 2, max = 30)
     private String name;
 
     @Column(name = "favorite")
