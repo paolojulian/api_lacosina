@@ -60,17 +60,8 @@ public class UserService {
     }
 
     @Transactional
-    public Profile updateProfile(
-            final Integer userId,
-            final String firstName,
-            final String lastName,
-            final String handle
-    ) {
+    public Profile updateProfile(final Integer userId, Profile profile) {
         User user = this.userRepository.findById(userId).orElseThrow();
-        Profile profile = user.getProfile();
-        profile.setFirstName(firstName);
-        profile.setLastName(lastName);
-        profile.setHandle(handle);
         user.setProfile(profile);
         this.userRepository.save(user);
         return user.getProfile();

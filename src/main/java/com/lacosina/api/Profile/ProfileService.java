@@ -12,11 +12,12 @@ public class ProfileService {
         this.profileRepository = profileRepository;
     }
 
+
     @Transactional
     public Profile createProfile(String handle) {
         final Profile profile = new Profile();
         profile.setHandle(handle);
-//        return profile;
+
         return this.profileRepository.save(profile);
     }
 

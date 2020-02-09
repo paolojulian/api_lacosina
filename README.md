@@ -19,7 +19,55 @@ Settings > Plugins
 ```
 ___
 ### Queries
-TODO
+Get users list
+```
+query {
+    users (limitCount: 10) {
+        id
+        email
+        username
+        profile {
+            firstName
+            lastName
+        }
+    }
+}
+```
+
+Get a certain user
+```
+query {
+    user (id: 2) {
+        email
+        username
+        profile {
+            handle
+        }
+    }
+}
+```
 ___
 ### Mutations
-TODO
+Register a user
+```
+mutation {
+    register (email: "scottypipz@gmail.com", username: "chefpipz", password: "qwe123") {
+        id
+        email
+    }
+}
+```
+___
+
+
+Docker
+```
+# Stop docker containers
+docker stop lacosina
+docker stop docker-mysql
+docker start -i docker-mysql
+
+docker run -p 2012:3306 --name mysql-pipz -e MYSQL_ROOT_PASSWORD={} -e MYSQL_DATABASE=lacosina -e MYSQL_USER={} MYSQL_PASSWORD={} mysql:8
+# Start the jar server
+docker run -p 8085:8085 --name lacosina --link mysql-pipz:mysql -d lacosina
+```
