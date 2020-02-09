@@ -1,5 +1,7 @@
 package com.lacosina.api.Recipe.DTO;
 
+import com.lacosina.api.Recipe.Recipe;
+import com.lacosina.api.Recipe.RecipeIngredient;
 import com.lacosina.api.Recipe.Validators.DurationRange;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data

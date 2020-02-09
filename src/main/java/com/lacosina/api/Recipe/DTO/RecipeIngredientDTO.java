@@ -1,5 +1,7 @@
 package com.lacosina.api.Recipe.DTO;
 
+import com.lacosina.api.Ingredient.Ingredient;
+import com.lacosina.api.Recipe.RecipeIngredient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,4 +17,16 @@ public class RecipeIngredientDTO {
     private String measurement;
 
     private Integer ingredientId;
+
+    /**
+     * Converts the fields into a RecipeIngredient class
+     * @return RecipeIngredient
+     */
+    public RecipeIngredient toRecipeIngredient() {
+        RecipeIngredient recipeIngredient = new RecipeIngredient();
+        recipeIngredient.setMeasurement(this.measurement);
+        recipeIngredient.setIngredient(new Ingredient(this.ingredientId));
+
+        return recipeIngredient;
+    }
 }
