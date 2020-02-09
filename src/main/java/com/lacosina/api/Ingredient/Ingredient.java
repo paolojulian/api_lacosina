@@ -21,11 +21,11 @@ public class Ingredient {
     private String ingredientName;
 
     @Column(name="description")
-    @Size(min = 0, max = 1000)
+    @Size(max = 1000)
     private String description;
 
     @Column(name="category")
-    @Size(min = 0, max = 30)
+    @Size(max = 30)
     private String category;
 
     public Ingredient() {}
