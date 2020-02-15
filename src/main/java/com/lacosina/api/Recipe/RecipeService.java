@@ -35,21 +35,7 @@ public class RecipeService {
         recipe.setDurationFrom_minutes(recipeDTO.getDurationFrom_minutes());
         recipe.setDurationTo_minutes(recipeDTO.getDurationTo_minutes());
 
-        // Set the ingredients
-        Set<RecipeIngredient> recipeIngredientSet = new HashSet<RecipeIngredient>();
-        for (RecipeIngredientDTO recipeIngredientDTO: recipeDTO.getRecipeIngredients()) {
-            // Fetch the ingredient if it exists
-            Ingredient ingredient = ingredientRepository.findById(recipeIngredientDTO.getIngredientId()).orElseThrow();
-            // Set the values
-            RecipeIngredient recipeIngredient = new RecipeIngredient();
-            recipeIngredient.setMeasurement(recipeIngredientDTO.getMeasurement());
-            recipeIngredient.setIngredient(ingredient);
-            // Save and add the recipeIngredient
-            recipeIngredientSet.add(recipeIngredientRepository.save(recipeIngredient));
-        }
-        recipe.setIngredients(recipeIngredientSet);
-
-        return this.recipeRepository.save(recipe);
+        return this.recipeRepository.save(this.updateRecipeIngredients(recipe, recipeDTO.getRecipeIngredients()));
     }
 
     /**
@@ -67,6 +53,25 @@ public class RecipeService {
         recipeToUpdate.setDurationTo_minutes(recipe.getDurationTo_minutes());
 
         return this.recipeRepository.save(recipeToUpdate);
+    }
+
+    @Transactional
+    public Recipe updateRecipeIngredients(Recipe recipe, Set<RecipeIngredientDTO> recipeIngredientDTOSet) {
+        // Set the ingredients
+        Set<RecipeIngredient> recipeIngredientSet = new HashSet<RecipeIngredient>();
+        for (RecipeIngredientDTO recipeIngredientDTO: recipeIngredientDTOSet) {
+            // Fetch the ingredient if it exists
+            Ingredient ingredient = ingredientRepository.findById(recipeIngredientDTO.getIngredientId()).orElseThrow();
+            // Set the values
+            RecipeIngredient recipeIngredient = new RecipeIngredient();
+            recipeIngredient.setMeasurement(recipeIngredientDTO.getMeasurement());
+            recipeIngredient.setIngredient(ingredient);
+            // Save and add the recipeIngredient
+            recipeIngredientSet.add(recipeIngredientRepository.save(recipeIngredient));
+        }
+        recipe.setIngredients(recipeIngredientSet);
+
+        return recipe;
     }
 
     /**
