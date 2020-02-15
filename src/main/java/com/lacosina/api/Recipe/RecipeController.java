@@ -1,6 +1,7 @@
 package com.lacosina.api.Recipe;
 
 import com.lacosina.api.Recipe.DTO.FullRecipeDTO;
+import com.lacosina.api.Recipe.DTO.RecipeIngredientSetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,23 @@ public class RecipeController {
         return this.recipeService.updateRecipe(id, recipe);
     }
 
+    /**
+     * Updates the ingredients of the given recipe
+     * @param id - Recipe.id
+     */
+    @PutMapping("/{id}/recipe-ingredients")
+    public Recipe updateRecipeIngredients(
+            @PathVariable int id,
+            @RequestBody RecipeIngredientSetDTO recipeIngredientSetDTO
+    ) {
+        Recipe recipe = this.recipeService.getRecipe(id);
+        return this.recipeService.updateRecipeIngredients(recipe, recipeIngredientSetDTO.getRecipeIngredients());
+    }
+
+    /**
+     * Delete a recipe
+     * @param id - Recipe id
+     */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteRecipe(@PathVariable int id) {
