@@ -49,22 +49,17 @@ public class RecipeService {
     }
 
     @Transactional
-    public Recipe updateRecipeIngredients(Recipe recipe, Set<RecipeIngredientDTO> recipeIngredientDTOSet) {
-        // Set the ingredients
-        Set<RecipeIngredient> recipeIngredientSet = new HashSet<>();
-        for (RecipeIngredientDTO recipeIngredientDTO: recipeIngredientDTOSet) {
-            // Fetch the ingredient if it exists
-            Ingredient ingredient = ingredientRepository.findById(recipeIngredientDTO.getIngredientId()).orElseThrow();
-            // Set the values
-            RecipeIngredient recipeIngredient = new RecipeIngredient();
-            recipeIngredient.setMeasurement(recipeIngredientDTO.getMeasurement());
-            recipeIngredient.setIngredient(ingredient);
-            // Save and add the recipeIngredient
-            recipeIngredientSet.add(recipeIngredientRepository.save(recipeIngredient));
-        }
-        recipe.setIngredients(recipeIngredientSet);
+    public Recipe updateRecipeProcedures(final int id, Set<RecipeProcedure> procedures) {
+        Recipe recipe = getRecipe(id);
+        recipe.setProcedures(procedures);
+        return recipeRepository.save(recipe);
+    }
 
-        return recipe;
+    @Transactional
+    public Recipe updateRecipeIngredients(final int id, Set<RecipeIngredient> ingredients) {
+        Recipe recipe = getRecipe(id);
+        recipe.setIngredients(ingredients);
+        return recipeRepository.save(recipe);
     }
 
     /**
