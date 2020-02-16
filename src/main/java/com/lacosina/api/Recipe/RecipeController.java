@@ -2,6 +2,8 @@ package com.lacosina.api.Recipe;
 
 import com.lacosina.api.Recipe.DTO.RecipeDTO;
 import com.lacosina.api.Recipe.DTO.RecipeIngredientSetDTO;
+import com.lacosina.api.Recipe.DTO.RecipeIngredientsDTO;
+import com.lacosina.api.Recipe.DTO.RecipeProceduresDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,23 +43,22 @@ public class RecipeController {
         return this.recipeService.updateRecipe(id, recipe);
     }
 
-    /**
-     * Updates the ingredients of the given recipe
-     * @param id - Recipe.id
-     */
-    @PutMapping("/{id}/recipe-ingredients")
-    public Recipe updateRecipeIngredients(
-            @PathVariable int id,
-            @RequestBody RecipeIngredientSetDTO recipeIngredientSetDTO
+    @PutMapping("/{id}/procedures")
+    public Recipe updateRecipeProcedures(
+            @PathVariable final int id,
+            @RequestBody RecipeProceduresDTO recipeProceduresDTO
     ) {
-        Recipe recipe = this.recipeService.getRecipe(id);
-        return this.recipeService.updateRecipeIngredients(recipe, recipeIngredientSetDTO.getRecipeIngredients());
+        return recipeService.updateRecipeProcedures(id, recipeProceduresDTO.getProcedures());
     }
 
-    /**
-     * Delete a recipe
-     * @param id - Recipe id
-     */
+    @PutMapping("/{id}/ingredients")
+    public Recipe updateRecipeIngredients(
+            @PathVariable int id,
+            @RequestBody RecipeIngredientsDTO recipeIngredientsDTO
+            ) {
+        return this.recipeService.updateRecipeIngredients(id, recipeIngredientsDTO.getIngredients());
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteRecipe(@PathVariable int id) {
