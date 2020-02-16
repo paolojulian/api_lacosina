@@ -2,7 +2,6 @@ package com.lacosina.api.Recipe;
 
 import com.lacosina.api.Ingredient.Ingredient;
 import com.lacosina.api.Ingredient.IngredientRepository;
-import com.lacosina.api.Recipe.DTO.FullRecipeDTO;
 import com.lacosina.api.Recipe.DTO.RecipeIngredientDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,20 +21,14 @@ public class RecipeService {
 
     /**
      * Creates a recipe
-     * @param recipeDTO - The request data
+     * @param recipe - The request data
      *
      * @return Recipe
      */
     @Transactional
-    public Recipe createRecipe(FullRecipeDTO recipeDTO) {
+    public Recipe createRecipe(Recipe recipe) {
         // Set the recipes
-        Recipe recipe = new Recipe();
-        recipe.setName(recipeDTO.getName());
-        recipe.setDescription(recipeDTO.getDescription());
-        recipe.setDurationFrom_minutes(recipeDTO.getDurationFrom_minutes());
-        recipe.setDurationTo_minutes(recipeDTO.getDurationTo_minutes());
-
-        return this.recipeRepository.save(this.updateRecipeIngredients(recipe, recipeDTO.getRecipeIngredients()));
+        return this.recipeRepository.save(recipe);
     }
 
     /**
@@ -58,7 +51,7 @@ public class RecipeService {
     @Transactional
     public Recipe updateRecipeIngredients(Recipe recipe, Set<RecipeIngredientDTO> recipeIngredientDTOSet) {
         // Set the ingredients
-        Set<RecipeIngredient> recipeIngredientSet = new HashSet<RecipeIngredient>();
+        Set<RecipeIngredient> recipeIngredientSet = new HashSet<>();
         for (RecipeIngredientDTO recipeIngredientDTO: recipeIngredientDTOSet) {
             // Fetch the ingredient if it exists
             Ingredient ingredient = ingredientRepository.findById(recipeIngredientDTO.getIngredientId()).orElseThrow();

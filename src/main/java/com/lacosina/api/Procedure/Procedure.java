@@ -32,6 +32,10 @@ public class Procedure {
 
     public Procedure() {}
 
+    public Procedure(Integer id) {
+        this.id = id;
+    }
+
     public Procedure(String name, String description, String image, int durationInSeconds) {
         this.setProcedureName(name);
         this.setDescription(description);

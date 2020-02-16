@@ -1,7 +1,7 @@
 package com.lacosina.api.Recipe.DTO;
 
-import com.lacosina.api.Recipe.Recipe;
 import com.lacosina.api.Recipe.RecipeIngredient;
+import com.lacosina.api.Recipe.RecipeProcedure;
 import com.lacosina.api.Recipe.Validators.DurationRange;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,14 +10,13 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
 import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @DurationRange
-public class FullRecipeDTO {
+public class RecipeDTO {
 
     @NotNull(message = "Please enter a name for the recipe.")
     @Size(min = 1, max = 30)
@@ -32,5 +31,7 @@ public class FullRecipeDTO {
     @Min(value = 0)
     private Long durationTo_minutes;
 
-    private Set<RecipeIngredientDTO> recipeIngredients;
+    private Set<RecipeIngredient> ingredients;
+
+    private Set<RecipeProcedure> procedures;
 }

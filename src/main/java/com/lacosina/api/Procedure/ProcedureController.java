@@ -14,7 +14,7 @@ public class ProcedureController {
     @Autowired
     private ProcedureService procedureService;
 
-    @PostMapping("/")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Procedure createProcedure(@Valid @RequestBody Procedure procedure) {
         return this.procedureService.createProcedure(procedure);

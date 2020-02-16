@@ -35,10 +35,15 @@ public class Recipe implements Serializable {
     @Column(name = "duration_to_minutes")
     private Long durationTo_minutes;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "recipe_id")
     @JsonManagedReference
-    private Set<RecipeIngredient> ingredients = new HashSet<RecipeIngredient>();
+    private Set<RecipeIngredient> ingredients = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "recipe_id")
+    @JsonManagedReference
+    private Set<RecipeProcedure> procedures = new HashSet<>();
 
     @ManyToOne
     private User user;

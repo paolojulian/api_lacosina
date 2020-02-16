@@ -1,7 +1,8 @@
 package com.lacosina.api.Recipe;
 
-import com.lacosina.api.Recipe.DTO.FullRecipeDTO;
+import com.lacosina.api.Recipe.DTO.RecipeDTO;
 import com.lacosina.api.Recipe.DTO.RecipeIngredientSetDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,14 +17,18 @@ public class RecipeController {
     @Autowired
     private RecipeService recipeService;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @GetMapping
     public List<Recipe> getAllRecipe() {
         return this.recipeService.getAllRecipe();
     }
 
     @PostMapping
-    public Recipe createRecipe(@Valid @RequestBody FullRecipeDTO recipe) {
-        return this.recipeService.createRecipe(recipe);
+    public Recipe createRecipe(@Valid @RequestBody RecipeDTO recipeDTO) {
+        Recipe recipe = convertToEntity(recipeDTO);
+        return recipeService.createRecipe(recipe);
     }
 
     @GetMapping("/{id}")
@@ -57,5 +62,15 @@ public class RecipeController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteRecipe(@PathVariable int id) {
         this.recipeService.deleteRecipe(id);
+    }
+
+    /**
+     * Converts RecipeDTO into a Recipe Entity
+     * @param recipeDTO - The Data transfer object of recipe
+     * @return Converted recipe (With Procedures and Ingredients)
+     */
+    private Recipe convertToEntity(RecipeDTO recipeDTO) {
+        Recipe recipe = modelMapper.map(recipeDTO, Recipe.class);
+        return recipe;
     }
 }
