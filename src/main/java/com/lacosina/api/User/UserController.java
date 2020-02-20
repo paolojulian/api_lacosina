@@ -15,8 +15,8 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(
-            @RequestParam(name = "username") String username,
-            @RequestParam(name = "password") String password
+//            @RequestParam(name = "username", defaultValue = "") String username,
+//            @RequestParam(name = "password", defaultValue = "") String password
     ) {
         return "Token";
     }
