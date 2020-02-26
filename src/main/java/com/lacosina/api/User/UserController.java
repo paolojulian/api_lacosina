@@ -2,6 +2,7 @@ package com.lacosina.api.User;
 
 import com.lacosina.api.Profile.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -13,6 +14,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @PreAuthorize("#oauth2.hasScope('user_info')")
     @PostMapping("/login")
     public String login(
 //            @RequestParam(name = "username", defaultValue = "") String username,

@@ -10,5 +10,6 @@ public class MyConfig {
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
+
     }
 }
